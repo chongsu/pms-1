@@ -90,7 +90,7 @@ double correct_rate(const std::vector<lib::KddSample>& samples, const std::vecto
 
 void SVMTest(uint32_t node_id, int num_of_node, int node_port, int master_port) {
   using DataStore = std::vector<lib::KddSample>;
-  using Parser = lib::Parser<lib::KddSample, DataStore>;
+  using Parser = lib::Parser<lib::KddSample, lib::DataStore>;
   using Parse = std::function<lib::KddSample(boost::string_ref, int)>;
   DataStore data_store;
   lib::KddSample kdd_sample;
@@ -109,7 +109,7 @@ void SVMTest(uint32_t node_id, int num_of_node, int node_port, int master_port) 
   //   master_port += 10000;
   // }
   int workers_per_node = 5;
-  lib::DataLoader<lib::KddSample, DataStore> data_loader;
+  lib::DataLoader<lib::KddSample, lib::DataStore> data_loader;
   data_loader.load<Parse>(url, hdfs_namenode, master_host, worker_host, hdfs_namenode_port, master_port, n_features,
                           kdd_parse, &data_store);
   uint32_t n = node_id;
